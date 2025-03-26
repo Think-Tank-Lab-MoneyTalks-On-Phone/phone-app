@@ -2,11 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet } from 'react-native';
 import ScreensBackground from "../components/screens-background/ScreensBackground";
 import TheRatingUploadSpentCards from "./theRatingUploadSpentCards/TheRatingUploadSpentCards";
+import SideBar from "../components/sideBar/SideBar";
 
 export default function Home() {
   return (
     <View style={styles.container}>
       <ScreensBackground/>
+      <SideBar/>
       <TheRatingUploadSpentCards/>
     </View>
   );

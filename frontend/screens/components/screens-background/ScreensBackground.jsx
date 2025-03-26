@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    width: "300%",
+    width: "200%",
     left: -175,
     height: "100%",
     opacity: 0.4,

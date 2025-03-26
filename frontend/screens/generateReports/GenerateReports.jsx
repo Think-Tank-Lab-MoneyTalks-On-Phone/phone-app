@@ -1,11 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet } from 'react-native';
 import ScreensBackground from "../components/screens-background/ScreensBackground";
+import SideBar from "../components/sideBar/SideBar";
 
 export default function GenerateReports() {
   return (
     <View style={styles.container}>
       <ScreensBackground/>
+      <SideBar/>
       <Text style={styles.text}>&gt;:D</Text>
     </View>
   );
