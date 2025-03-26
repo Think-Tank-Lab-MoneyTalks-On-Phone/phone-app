@@ -78,6 +78,7 @@ export default function SideBar() {
       useNativeDriver: true,
     }).start();
   };
+  
 
   const menuItems = [
     { id: "sideBarOptionHome", path: "Acasa", label: "Acasa", icon: HomeIcon },

@@ -1,11 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet } from 'react-native';
 import ScreensBackground from "../components/screens-background/ScreensBackground";
+import LoginRegisterMenu from "../components/login-register-menu/LoginRegisterMenu";
 
 export default function Register() {
   return (
     <View style={styles.container}>
       <ScreensBackground/>
+      <LoginRegisterMenu/>
       <Text style={styles.text}>&gt;:D</Text>
     </View>
   );
