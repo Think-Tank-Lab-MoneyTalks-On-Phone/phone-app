@@ -36,12 +36,12 @@ export default function App() {
           ),
         })}
       >
-
+        <Stack.Screen name="Acasa" component={Home} />
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Despre aplicatie" component={AboutTheApp} />
         <Stack.Screen name="Inregistrare" component={Register} />
         <Stack.Screen name="Autentificare" component={Login} />
-        <Stack.Screen name="Acasa" component={Home} />
+        {/*<Stack.Screen name="Acasa" component={Home} />*/}
         <Stack.Screen name="Tutorial" component={Tutorial} />
         <Stack.Screen name="Gestionare Cheltuieli" component={ViewSpendings} />
         <Stack.Screen name="Jurnal Cheltuieli" component={ViewSpendings} />
