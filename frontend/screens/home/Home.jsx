@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet } from 'react-native';
 import ScreensBackground from "../components/screens-background/ScreensBackground";
+import TheRatingUploadSpentCards from "./theRatingUploadSpentCards/TheRatingUploadSpentCards";
 
 export default function Home() {
   return (
     <View style={styles.container}>
       <ScreensBackground/>
-      <Text style={styles.text}>&gt;:D</Text>
+      <TheRatingUploadSpentCards/>
     </View>
   );
 }
