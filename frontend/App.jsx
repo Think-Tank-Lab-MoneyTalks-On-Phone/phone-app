@@ -38,7 +38,7 @@ export default function App() {
             ),
           })}
         >
-          <Stack.Screen name="Welcome" component={Welcome} />
+          <Stack.Screen name="Bun venit!" component={Welcome} />
           <Stack.Screen name="LoginForm" component={LoginForm} />
           <Stack.Screen name="Inregistrare" component={Register} />
           <Stack.Screen name="Despre aplicatie" component={AboutTheApp} />

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAuth } from "../components/authContext/AuthContext.jsx"
 import { useNavigation } from '@react-navigation/native';
 import LoginRegisterMenu from '../components/login-register-menu/LoginRegisterMenu.jsx';
+import ScreensBackground from '../components/screens-background/ScreensBackground.jsx';
 
 const LoginForm = () => {
     const navigation = useNavigation();
@@ -30,6 +31,7 @@ const LoginForm = () => {
     return (
         <>
             <LoginRegisterMenu/>
+            <ScreensBackground/>
             <View style={styles.container}>
                 <Text style={styles.heading}>Autentificare</Text>
                 <Text style={styles.subtitle}>Autentifică-te pentru a continua!</Text>
@@ -62,7 +64,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f4f7fb',
         padding: 20,
     },
     heading: {
