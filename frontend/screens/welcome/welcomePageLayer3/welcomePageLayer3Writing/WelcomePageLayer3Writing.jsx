@@ -14,17 +14,18 @@ export default function WelcomePageLayer3Writing() {
 const styles = StyleSheet.create({
     welcomePageLayer3Writing: {
         position: 'absolute', // Înlocuim 'fixed' cu 'absolute'
-        top: '20%',
-        left: '10%',
-        width: '80%',
+        top: -175,
+        left: -295,
+        width: '1000%',
+        transform: [{scale: 1.2}]
     },
     messageLayer3: {
         fontFamily: 'Space Grotesk', // Va trebui să ai fontul respectiv adăugat în proiectul tău
-        fontSize: 46,
+        fontSize: 14,
         fontWeight: '600',
         color: '#183153',
         textAlign: 'center',
-        lineHeight: 1.5,
+        lineHeight: 30,
         maxWidth: '100%',
     },
 });

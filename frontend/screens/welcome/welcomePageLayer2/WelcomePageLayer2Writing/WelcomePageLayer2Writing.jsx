@@ -5,7 +5,7 @@ export default function WelcomePageLayer2Writing() {
     return (
         <View style={styles.welcomePageLayer2Writing}>
             <Text style={styles.messageLayer2}>
-                Încarcă bonurile, facturile și cheltuielile{'\n'}online pentru a genera rapoarte personalizate{'\n'}destinate gestionării cheltuielilor tale!
+                Încarcă bonurile, facturile și cheltuielile{'\n'} online pentru a genera rapoarte{'\n'} personalizate destinate gestionării{'\n'} cheltuielilor tale!
             </Text>
         </View>
     );
@@ -14,17 +14,17 @@ export default function WelcomePageLayer2Writing() {
 const styles = StyleSheet.create({
     welcomePageLayer2Writing: {
         position: 'absolute', // React Native folosește absolute în loc de fixed
-        top: '40%',
-        left: '-5%',
-        width: '80%',
+        top: -200,
+        left: -295,
+        width: '1000%',
     },
     messageLayer2: {
         fontFamily: 'Space Grotesk', // Asigură-te că ai fontul instalat sau folosești unul similar
-        fontSize: 46,
+        fontSize: 20,
         fontWeight: '600',
         color: '#183153',
         textAlign: 'center',
-        lineHeight: 1.5,
+        lineHeight: 35,
         maxWidth: '100%',
     },
 });

@@ -11,13 +11,13 @@ export default function WelcomePageLayer2Image() {
 
 const styles = StyleSheet.create({
     wlcPageLayer2Img: {
-        position: "absolute",
-        width: "25%", // Dimensiunea containerului
-        top: "23%",
-        left: "67%",
+        position: 'absolute',
+        width: 450, 
+        top: -150,
+        left: -250,
+        transform: [{ scale: 0.55 }],
     },
     image: {
-        width: "100%", // Imaginea este 100% din container
-        height: "auto", // În React Native, 'auto' pentru înălțime nu funcționează, dar putem să lăsăm React Native să se ocupe de dimensiuni
+        width: '100%',
     },
 });

@@ -12,12 +12,12 @@ export default function CsUBBLogoImage() {
 const styles = StyleSheet.create({
     wlcPageCsUbbLogo: {
         position: 'absolute',
-        width: '5%', // Dimensiunea containerului
-        top: '45%',
-        left: '56.5%',
+        width: 450, 
+        top: 165,
+        left: -75,
+        transform: [{ scale: 0.35 }],
     },
     image: {
-        width: '100%', // Imaginea va ocupa 100% din container
-        height: 'auto', // React Native gestionează automat înălțimea imaginii
+        width: '45%',
     },
 });

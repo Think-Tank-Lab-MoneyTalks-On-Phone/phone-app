@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     welcomePageWriting: {
         position: 'absolute',
         top: -150,
-        left: -160,
-        width: '80%',
+        left: -295,
+        width: '1000%',
         alignItems: 'center',  // Asigură alinierea corectă pe orizontală
         transform: [{scale: 1.1}]
     },

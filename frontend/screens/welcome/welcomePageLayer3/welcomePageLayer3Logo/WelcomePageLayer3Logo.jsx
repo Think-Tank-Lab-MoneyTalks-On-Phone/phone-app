@@ -12,10 +12,15 @@ export default function WelcomePageLayer3Logo() {
 
 const styles = StyleSheet.create({
     wlcPageLayer3Logo: {
-        position: 'absolute', // echivalentul "fixed" în React Native
-        maxWidth: 700,
-        top: '55%',
-        left: '30%',
-        transform: [{ translateX: -350 }], // pentru a corecta poziția pe axa X
+        position: "absolute",
+        width: 100,
+        top: -425,
+        bottom: 0,
+        left: 0,
+        right: 20,
+        transform: [
+            { scale: 0.3 },
+            { translateX: -670 }
+          ],          
     },
 });

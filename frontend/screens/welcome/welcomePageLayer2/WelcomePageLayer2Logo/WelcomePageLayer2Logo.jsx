@@ -11,10 +11,13 @@ export default function WelcomePageLayer2Logo() {
 
 const styles = StyleSheet.create({
     wlcPageLayer2Logo: {
-        position: "absolute", // echivalentul "fixed" în web
-        maxWidth: 700,
-        top: "25%",
-        left: "16%",
-        transform: [{ translateX: -350 }], // Pentru a centra containerul pe ecran
+        position: 'absolute',
+        width: 450, 
+        top: -365,
+        left: -330,
+        transform: [{ scale: 0.3}],
+    },
+    image: {
+        width: '150%',
     },
 });

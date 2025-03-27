@@ -12,12 +12,12 @@ export default function WelcomePageLayer3Image2() {
 const styles = StyleSheet.create({
     wlcPageLayer3Img2: {
         position: 'absolute',
-        width: '30%', // Dimensiunea containerului
-        top: '34%',
-        left: '1%',
+        width: 450, 
+        top: -210,
+        left: -110,
+        transform: [{ scale: 0.3 }],
     },
     image: {
-        width: '100%', // Imaginea va ocupa 100% din container
-        height: 'auto', // React Native gestionează automat înălțimea imaginii
+        width: '100%',
     },
 });

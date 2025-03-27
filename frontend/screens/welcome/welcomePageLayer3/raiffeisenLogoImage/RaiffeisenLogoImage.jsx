@@ -12,12 +12,12 @@ export default function RaiffeisenLogoImage() {
 const styles = StyleSheet.create({
     wlcPageRaiffeisenLogo: {
         position: 'absolute',
-        width: '5%', // Dimensiunea containerului
-        top: '45%',
-        left: '40%',
+        width: 450, 
+        top: -60,
+        left: -340,
+        transform: [{ scale: 0.1 }],
     },
     image: {
-        width: '100%', // Imaginea va ocupa 100% din container
-        height: 'auto', // React Native gestionează automat înălțimea imaginii
+        width: '145%',
     },
 });
