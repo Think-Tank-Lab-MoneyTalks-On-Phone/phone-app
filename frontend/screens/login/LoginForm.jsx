@@ -5,6 +5,7 @@ import { useAuth } from "../components/authContext/AuthContext.jsx"
 import { useNavigation } from '@react-navigation/native';
 import LoginRegisterMenu from '../components/login-register-menu/LoginRegisterMenu.jsx';
 import ScreensBackground from '../components/screens-background/ScreensBackground.jsx';
+import LoginFormImage from './loginFormImage/LoginFormImage.jsx';
 
 const LoginForm = () => {
     const navigation = useNavigation();
@@ -55,6 +56,7 @@ const LoginForm = () => {
                     <Text style={styles.buttonText}>Autentifică-te</Text>
                 </TouchableOpacity>
             </View>
+            <LoginFormImage/>
         </>
     );
 };
@@ -65,6 +67,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
+        top: 110,
     },
     heading: {
         fontSize: 30,

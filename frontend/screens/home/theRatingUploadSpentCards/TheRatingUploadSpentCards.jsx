@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
-const TheRatingUploadSpentCards = () => {
+const TheRatingUploadSpentCards = ({ lastThirtyDaysSpendingsSum, uploadedBillsOnThePastThirtyDays }) => {
     return (
         <View style={styles.container}>
             <View style={styles.card}>
@@ -23,17 +23,17 @@ const TheRatingUploadSpentCards = () => {
 
                 {/* Bonuri incarcate */}
                 <View style={[styles.statBox, styles.secondCard]}>
-                <ImageBackground
-                            style={[styles.secondCardImage, styles.card]}
-                            source={require('../../../assets/img-card2.png')}
-                        />
+                    <ImageBackground
+                        style={[styles.secondCardImage, styles.card]}
+                        source={require('../../../assets/img-card2.png')}
+                    />
                     <Text style={styles.title}>Bonuri incarcate (30 zile)</Text>
                     <View style={styles.bottomSection}>
                         <Svg width={27} height={27} viewBox="0 0 24 24">
                             <Path d="M2 10h4v12H2zM22 11a3 3 0 0 0-3-3h-5.68l.93-4.42.02-.18a1.5 1.5 0 0 0-.44-1.06L13 2l-6.29 6.29a1 1 0 0 0-.29.71V19a2 2 0 0 0 2 2h7.35a3 3 0 0 0 2.82-2.06l2.26-7.26A2.85 2.85 0 0 0 22 11z" fill="blueviolet" />
                         </Svg>
-                        
-                        <Text style={styles.value}>0</Text>
+
+                        <Text style={styles.value}>{uploadedBillsOnThePastThirtyDays === undefined ? '0' : uploadedBillsOnThePastThirtyDays}</Text>
                     </View>
                 </View>
 
@@ -48,7 +48,10 @@ const TheRatingUploadSpentCards = () => {
                             style={styles.thirdCardImage}
                             source={require('../../../assets/img-card3.png')}
                         />
-                        <Text style={styles.value}>0 RON</Text>
+                        <Text style={styles.value}>
+                            {lastThirtyDaysSpendingsSum === undefined ? '0' : lastThirtyDaysSpendingsSum} RON
+                        </Text>
+
                     </View>
                 </View>
             </View>
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
     firstCardImage: {
-        position: 'absolute', 
+        position: 'absolute',
         top: -15,
         left: 45,
         right: 0,
@@ -111,21 +114,21 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         width: 45,
         height: 45,
-        resizeMode: 'cover', 
+        resizeMode: 'cover',
     },
     secondCardImage: {
-        position: 'absolute', 
+        position: 'absolute',
         top: -50,
         left: -30,
         right: 0,
         bottom: 0,
-        borderRadius:20,
+        borderRadius: 20,
         width: 250,
         height: 250,
-        resizeMode: 'cover', 
+        resizeMode: 'cover',
     },
     thirdCardImage: {
-        position: 'absolute', 
+        position: 'absolute',
         top: -60,
         left: 105,
         right: 0,
@@ -133,7 +136,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         width: 55,
         height: 55,
-        resizeMode: 'cover', 
+        resizeMode: 'cover',
     },
 });
 
