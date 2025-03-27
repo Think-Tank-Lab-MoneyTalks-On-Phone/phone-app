@@ -11,11 +11,12 @@ import AboutTheApp from './screens/aboutTheApp/AboutTheApp.jsx';
 import Register from './screens/register/Register.jsx';
 import { Image, Text, StyleSheet } from 'react-native';
 import LoginForm from './screens/login/LoginForm.jsx';
-import { AuthProvider, useAuth } from './screens/components/authContext/AuthContext.jsx';
+import { AuthProvider } from './screens/components/authContext/AuthContext.jsx';
 import Account from './screens/account/Account.jsx';
 import ProtectedRoute from './screens/components/protectedRoutes/ProtectedRoutes.jsx';
 import PublicRoute from './screens/components/protectedRoutes/PublicRoute.jsx';
-
+import { useAuth } from './screens/components/authContext/AuthContext.jsx';
+import Logout from './screens/components/logout/Logout.jsx';
 const Stack = createStackNavigator();
 
 const CustomHeader = () => (
@@ -57,9 +58,7 @@ const App = () => {
         >
           {/* Rute publice */}
           <Stack.Screen name="Bun venit!">
-            {() => <>
-            <PublicRoute><Welcome /></PublicRoute>
-            </>}
+            {() => <PublicRoute><Welcome /></PublicRoute>}
           </Stack.Screen>
           <Stack.Screen name="Despre aplicatie">
             {() => <PublicRoute><AboutTheApp /></PublicRoute>}
@@ -94,7 +93,7 @@ const App = () => {
             {() => <ProtectedRoute><Account /></ProtectedRoute>}
           </Stack.Screen>
           <Stack.Screen name="Logout">
-            {() => <ProtectedRoute><Welcome /></ProtectedRoute>}
+            {() => <ProtectedRoute><Logout /></ProtectedRoute>}
           </Stack.Screen>
         </Stack.Navigator>
       </AuthProvider>

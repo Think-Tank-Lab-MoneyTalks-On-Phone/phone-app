@@ -9,47 +9,47 @@ export const AuthProvider = ({ children }) => {
     const [userEmail, setUserEmail] = useState(null);
     const [userPassword, setUserPassword] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const navigation = useNavigation();
+    const [logoutTimer, setLogoutTimer] = useState(null);
+
+    const clearSessionTimer = () => {
+        if (logoutTimer) {
+            clearTimeout(logoutTimer);
+        }
+    };
+
+    const checkAuth = async () => {
+        try {
+            const storedData = await AsyncStorage.getItem('auth');
+            if (storedData) {
+                const { email, password, expiration } = JSON.parse(storedData);
+                if (new Date().getTime() < expiration) {
+                    setUserEmail(email);
+                    setUserPassword(password);
+                    const remainingTime = expiration - new Date().getTime();
+                    setLogoutTimer(setTimeout(logout, remainingTime));
+                } else {
+                    await AsyncStorage.removeItem('auth');
+                }
+            }
+        } catch (error) {
+            console.error('Error checking auth:', error);
+        }
+        setIsLoading(false);
+    };
 
     useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                const storedData = await AsyncStorage.getItem('auth');
-                if (storedData) {
-                    const { email, password, expiration } = JSON.parse(storedData);
-                    if (new Date().getTime() < expiration) {
-                        setUserEmail(email);
-                        setUserPassword(password);
-                        const remainingTime = expiration - new Date().getTime();
-                        setTimeout(logout, remainingTime);
-                    } else {
-                        logout();
-                    }
-                }
-            } catch (error) {
-                console.error('Error checking auth:', error);
-            }
-            setIsLoading(false);
-        };
         checkAuth();
+        return () => clearSessionTimer();
     }, []);
 
     const login = async (email, password) => {
         try {
+            clearSessionTimer();
             const expirationTime = new Date().getTime() + SESSION_EXPIRATION_MS;
             await AsyncStorage.setItem('auth', JSON.stringify({ email, password, expiration: expirationTime }));
             setUserEmail(email);
             setUserPassword(password);
-            setTimeout(logout, SESSION_EXPIRATION_MS);
-            
-            const lastExecution = await AsyncStorage.getItem('lastReportExecution');
-            const now = new Date().getTime();
-
-            if (!lastExecution || now - parseInt(lastExecution) > SESSION_EXPIRATION_MS) {
-                handleGenerateReport();
-            }
-            
-            navigation.navigate('Acasa'); 
+            setLogoutTimer(setTimeout(logout, SESSION_EXPIRATION_MS));
         } catch (error) {
             console.error('Error during login:', error);
         }
@@ -57,15 +57,14 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         try {
+            clearSessionTimer();
             await AsyncStorage.removeItem('auth');
             setUserEmail(null);
             setUserPassword(null);
-            navigation.navigate('Autentificare');
         } catch (error) {
             console.error('Error during logout:', error);
         }
     };
-    
 
     return (
         <AuthContext.Provider value={{ userEmail, userPassword, login, logout, isLoading }}>
