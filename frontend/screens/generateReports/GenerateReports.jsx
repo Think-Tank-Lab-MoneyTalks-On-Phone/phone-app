@@ -1,27 +1,93 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, ActivityIndicator, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, TextInput, ActivityIndicator, StyleSheet, ScrollView, Alert } from 'react-native';
 import ScreensBackground from '../components/screens-background/ScreensBackground';
 import SideBar from '../components/sideBar/SideBar';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from 'axios';
 
 const GenerateReports = () => {
   const [selectedReport, setSelectedReport] = useState(null);
   const [reportContent, setReportContent] = useState('');
   const [customInput, setCustomInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleGenerateReport = (type) => {
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const storedData = await AsyncStorage.getItem('auth');
+        if (!storedData) return;
+
+        const { email, password } = JSON.parse(storedData);
+        setEmail(email);
+        setPassword(password);
+        setIsLoading(true);
+
+        const userResponse = await axios.get(`http://10.0.2.2:8080/users/byEmail/${email}`, {
+          headers: { "Content-Type": "application/json" },
+          auth: { username: email, password },
+        });
+
+        if (userResponse.data?.id) {
+          setUserId(userResponse.data.id);
+        }
+      } catch (error) {
+        console.error('Eroare la preluarea userului:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleGenerateReport = async (reportType) => {
+    if (!userId) {
+      Alert.alert('Eroare', 'User ID nu este setat!');
+      return;
+    }
+
     setIsLoading(true);
-    setTimeout(() => {
-      setReportContent(`Raport generat pentru: ${type}`);
-      setSelectedReport(type);
-      setIsLoading(false);
-    }, 2000);
+    setSelectedReport(reportType);
+
+    try {
+      const credentials = btoa(`${email}:${password}`);
+      const headers = { Authorization: `Basic ${credentials}`, "Content-Type": "application/json" };
+
+      const response = await axios.post(
+        `http://10.0.2.2:8080/api/report/${reportType === 'custom' ? 'custom' : reportType}/${userId}`,
+        reportType === 'custom' ? { description: customInput } : {},
+        { headers }
+      );
+
+      setReportContent(processReportContent(response.data.response));
+    } catch (error) {
+      console.error('Eroare la generarea raportului:', error);
+      setReportContent('Eroare la conexiunea cu serverul');
+    }
+    setIsLoading(false);
+  };
+
+  const processReportContent = (content) => {
+    if (!content) return 'Raportul nu conține date.';
+    return content
+      .replace(/\$\$?[\s\S]+?\$\$?/g, '')
+      .replace(/\\text{.*?}/g, '')
+      .replace(/\*\*/g, '')
+      .replace(/###|####/g, '')
+      .replace(/\[.*?\]/g, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim()
+      .split('\n\n')
+      .map(p => p.trim());
   };
 
   return (
     <>
       <ScreensBackground />
-      <SideBar/>
+      <SideBar />
       <View style={styles.container}>
         {!selectedReport ? (
           <ScrollView>
@@ -49,17 +115,46 @@ const GenerateReports = () => {
             </View>
           </ScrollView>
         ) : (
-          <View style={styles.reportContainer}>
-            {isLoading ? (
-              <ActivityIndicator size="large" color="#FFD700" />
-            ) : (
-              <Text style={styles.reportText}>{reportContent}</Text>
-            )}
-            {!isLoading && (
-              <TouchableOpacity style={styles.backButton} onPress={() => setSelectedReport(null)}>
-                <Text style={styles.buttonText}>Înapoi</Text>
+          <View style={styles.reportResults}>
+            <ScrollView
+              style={styles.reportContentBox}
+              contentContainerStyle={{ flexGrow: 1 }}
+            >
+              {isLoading ? (
+                <ActivityIndicator size="large" color="#0000ff" />
+              ) : (
+                Array.isArray(reportContent) ? (
+                  reportContent.map((paragraph, index) => (
+                    <View key={index} style={{ marginBottom: 24 }}>
+                      {paragraph.split('\n').map((line, lineIndex, arr) => (
+                        <React.Fragment key={lineIndex}>
+                          <Text>{line}</Text>
+                          {lineIndex !== arr.length - 1 && <Text>{'\n'}</Text>}
+                          {line.trim().endsWith('.') && <View style={{ height: 12 }} />}
+                        </React.Fragment>
+                      ))}
+                    </View>
+                  ))
+                ) : (
+                  <Text>{reportContent}</Text>
+                )
+              )}
+
+              { !isLoading &&
+              <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => {
+                  setSelectedReport(null);
+                  setReportContent('');
+                  setCustomInput('');
+                }}
+              >
+                <Text style={styles.buttonText}>← Înapoi la Rapoarte</Text>
               </TouchableOpacity>
-            )}
+              }
+
+
+            </ScrollView>
           </View>
         )}
       </View>
