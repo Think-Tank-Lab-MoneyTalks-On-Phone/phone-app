@@ -23,7 +23,7 @@ export default function SideBar() {
       onMoveShouldSetPanResponder: (_, gestureState) => {
         const { dx, dy } = gestureState;
         const isHorizontal = Math.abs(dx) > Math.abs(dy * 2);
-        
+
         if (!sidebarVisible) {
           const isRightSwipe = dx > minSwipeDistance;
           const isNearLeftEdge = gestureState.moveX < 30;
@@ -78,7 +78,7 @@ export default function SideBar() {
       useNativeDriver: true,
     }).start();
   };
-  
+
 
   const menuItems = [
     { id: "sideBarOptionHome", path: "Acasa", label: "Acasa", icon: HomeIcon },
@@ -114,8 +114,39 @@ export default function SideBar() {
         ))}
       </Animated.View>
 
+      <TouchableOpacity
+        onPress={openSidebar}
+        activeOpacity={0.7}
+        style={styles.arrowTouchable}
+      >
+        <Animated.View
+          style={[
+            styles.arrowContainer,
+            {
+              transform: [
+                {
+                  translateX: pan.interpolate({
+                    inputRange: [-250, 0],
+                    outputRange: [-15, 235],
+                    extrapolate: 'clamp',
+                  })
+                }
+              ],
+              opacity: pan.interpolate({
+                inputRange: [-250, -200, -150],
+                outputRange: [1, 0.5, 0],
+                extrapolate: 'clamp',
+              })
+            }
+          ]}
+        >
+          <Text style={styles.arrowIcon}>→</Text>
+        </Animated.View>
+      </TouchableOpacity>
+
       {!sidebarVisible && (
-        <View style={styles.leftEdgeDetector} {...panResponder.panHandlers} />
+        <View style={styles.leftEdgeDetector} {...panResponder.panHandlers}>
+        </View>
       )}
 
       {sidebarVisible && (
@@ -191,5 +222,49 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'transparent',
     zIndex: 998,
+  },
+  leftEdgeDetector: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    bottom: 0,
+    width: 30,
+    backgroundColor: 'transparent',
+    zIndex: 999,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  arrowContainer: {
+    position: 'absolute',
+    top: '0%',
+    left: 0,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    width: 35,
+    height: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
+    zIndex: 500,
+  },
+  arrowIcon: {
+    fontSize: 24,
+    color: 'rgba(0, 0, 0, 0.7)',
+    marginLeft: 4,
+    marginTop: -10,
+  },
+  arrowTouchable: {
+    position: 'absolute',
+    top: '3%',
+    left: 0,
+    width: 40,
+    height: 40,
+    zIndex: 1001,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
