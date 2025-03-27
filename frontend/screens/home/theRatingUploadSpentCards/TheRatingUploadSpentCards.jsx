@@ -1,8 +1,123 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { ToastAndroid } from 'react-native';
 
 const TheRatingUploadSpentCards = ({ lastThirtyDaysSpendingsSum, uploadedBillsOnThePastThirtyDays }) => {
+    const [userId, setUserId] = useState(null);
+    const [myUserEmail, setMyUserEmail] = useState(null);
+    const [myUserPassword, setMyUserPassword] = useState(null);
+    const [myUserSpendingsLimits, setMyUserSpendingsLimits] = useState(null);
+    const [thisMonthSpendingLimit, setThisMonthSpendingLimit] = useState(0);
+    const [limitSet, setLimitSet] = useState(false);
+    const [aiRating, setAiRating] = useState(0);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const storedData = await AsyncStorage.getItem("auth");
+                if (!storedData) return;
+
+                const { email, password } = JSON.parse(storedData);
+                const userResponse = await axios.get(`http://10.0.2.2:8080/users/byEmail/${email}`, {
+                    headers: { 'Content-Type': 'application/json' },
+                    auth: { username: email, password: password }
+                });
+
+                setUserId(userResponse.data.id);
+                setMyUserEmail(email);
+                setMyUserPassword(password);
+                setMyUserSpendingsLimits(userResponse.data.spendingLimits);
+
+                const currentMonth = new Date().getMonth();
+                const currentMonthLimit = userResponse.data.spendingLimits.find(limit => 
+                    new Date(limit.startDate).getMonth() === currentMonth
+                );
+
+                setThisMonthSpendingLimit(currentMonthLimit ? currentMonthLimit.spendingLimit : 0);
+            } catch (error) {
+                console.error("Eroare la preluarea userului:", error);
+            }
+        };
+
+        fetchUserData();
+    }, [limitSet]);
+
+    const sendSpendingLimitToBackend = async (limit) => {
+        const today = new Date();
+        const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+        const spendingLimitData = {
+            spendingLimit: limit,
+            startDate: today.toISOString().split('T')[0],
+            endDate: endOfMonth.toISOString().split('T')[0],
+            userId: userId
+        };
+
+        try {
+            const response = await axios.post("http://10.0.2.2:8080/spendingLimits", spendingLimitData, {
+                headers: { "Content-Type": "application/json" },
+                auth: { username: myUserEmail, password: myUserPassword }
+            });
+
+            if (response.status === 200 || response.status === 201) {
+                ToastAndroid.show("Limita de cheltuieli setată cu succes!", ToastAndroid.SHORT);
+                setLimitSet(true);
+            }
+        } catch (error) {
+            console.error("Failed to set spending limit:", error.response?.data || error.message);
+        }
+    };
+
+    const handleGenerateReport = async (retryCount = 0) => {
+        if (!userId) {
+            console.error("User ID-ul nu este setat!");
+            return;
+        }
+
+        try {
+            const credentials = btoa(`${myUserEmail}:${myUserPassword}`);
+            const headers = { Authorization: `Basic ${credentials}`, "Content-Type": "application/json" };
+
+            const response = await axios.post(`http://10.0.2.2:8080/api/report/nota_ai/${userId}`, {}, { headers });
+
+            const aiScore = response.data.response;
+            if (!isNaN(Number(aiScore))) {
+                setAiRating(aiScore);
+                await AsyncStorage.setItem('aiRating', aiScore.toString());
+                await AsyncStorage.setItem('lastReportExecution', new Date().getTime().toString());
+            } else if (retryCount < 3) {
+                setTimeout(() => handleGenerateReport(retryCount + 1), 2000);
+            } else {
+                setAiRating("0");
+                await AsyncStorage.setItem('aiRating', "0");
+            }
+        } catch (error) {
+            console.error("Eroare la generarea raportului:", error);
+            setAiRating("0");
+            await AsyncStorage.setItem('aiRating', "0");
+        }
+    };
+
+    useEffect(() => {
+        const checkReportExecution = async () => {
+            if (userId) {
+                const lastExecution = await AsyncStorage.getItem('lastReportExecution');
+                const now = new Date().getTime();
+
+                if (!lastExecution || now - parseInt(lastExecution) > 12 * 60 * 60 * 1000) {
+                    handleGenerateReport();
+                }
+            }
+        };
+        checkReportExecution();
+    }, [userId]);
+
+    const storedAiRating = AsyncStorage.getItem('aiRating') || "0";
+
+
     return (
         <View style={styles.container}>
             <View style={styles.card}>
@@ -17,7 +132,7 @@ const TheRatingUploadSpentCards = ({ lastThirtyDaysSpendingsSum, uploadedBillsOn
                             style={styles.firstCardImage}
                             source={require('../../../assets/img-card1.png')}
                         />
-                        <Text style={styles.value}>0/10</Text>
+                        <Text style={styles.value}>{storedAiRating}/10</Text>
                     </View>
                 </View>
 

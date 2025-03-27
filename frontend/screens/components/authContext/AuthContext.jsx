@@ -45,9 +45,9 @@ export const AuthProvider = ({ children }) => {
             const lastExecution = await AsyncStorage.getItem('lastReportExecution');
             const now = new Date().getTime();
 
-            //if (!lastExecution || now - parseInt(lastExecution) > SESSION_EXPIRATION_MS) {
-                //handleGenerateReport();
-            //}
+            if (!lastExecution || now - parseInt(lastExecution) > SESSION_EXPIRATION_MS) {
+                handleGenerateReport();
+            }
             
             navigation.navigate('Acasa'); 
         } catch (error) {
