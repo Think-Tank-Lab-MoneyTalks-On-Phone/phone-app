@@ -87,6 +87,8 @@ export default function SideBar() {
     { id: "sideBarOptionJurnalCheltuieli", path: "Jurnal Cheltuieli", label: "Jurnal cheltuieli", icon: JurnalCheltuieliIcon },
     { id: "sideBarOptionStatisticiCheltuieli", path: "Statistici Cheltuieli", label: "Statistici cheltuieli", icon: StatisticiCheltuieliIcon },
     { id: "sideBarOptionConsiliereFinanciara", path: "Consiliere Financiara", label: "Consiliere financiara", icon: ConsiliereCheltuieliIcon },
+    { id: "sideBarOptionSettings", path: "Setarile contului", label: "Setarile contului", icon: ConsiliereCheltuieliIcon },
+    { id: "sideBarOptionLogout", path: "Logout", label: "Logout", icon: ConsiliereCheltuieliIcon },
   ];
 
   return (

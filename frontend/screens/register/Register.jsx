@@ -33,7 +33,7 @@ const RegisterForm = () => {
 
       if (response.status === 200) {
         Alert.alert('Succes', 'Înregistrarea s-a realizat cu succes!');
-        setTimeout(() => navigation.navigate("LoginForm"), 1500);
+        setTimeout(() => navigation.navigate("Autentificare"), 1500);
       }
     } catch (err) {
       const errorMessage = err.response?.data || 'A apărut o eroare la înregistrare.';
@@ -93,7 +93,7 @@ const RegisterForm = () => {
           <Text style={styles.buttonText}>Înregistrează-te</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("LoginForm")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Autentificare")}>
           <Text style={styles.link}>Deții deja un cont? Autentifică-te!</Text>
         </TouchableOpacity>
 

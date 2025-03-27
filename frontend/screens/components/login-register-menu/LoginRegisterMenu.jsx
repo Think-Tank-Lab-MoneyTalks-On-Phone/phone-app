@@ -79,7 +79,8 @@ export default function LoginRegisterMenu() {
 
     const menuItems = [
         { id: "sideBarOptionWelcome", path: "Bun venit!", label: "Bun venit!", icon: HomeIcon },
-        { id: "sideBarOptionAuth", path: "LoginForm", label: "Autentificare", icon: HomeIcon },
+        { id: "sideBarOptionAboutTheApp", path: "Despre aplicatie", label: "Despre aplicatie", icon: HomeIcon },
+        { id: "sideBarOptionAuth", path: "Autentificare", label: "Autentificare", icon: HomeIcon },
         { id: "sideBarOptionRegister", path: "Inregistrare", label: "Inregistrare", icon: TutorialIcon },
     ];
     return (

@@ -12,6 +12,7 @@ import Register from './screens/register/Register.jsx';
 import { Image, View, Text, StyleSheet } from 'react-native';
 import LoginForm from './screens/login/LoginForm.jsx';
 import { AuthProvider } from './screens/components/authContext/AuthContext.jsx';
+import Account from './screens/account/Account.jsx';
 
 const Stack = createStackNavigator();
 
@@ -39,15 +40,17 @@ export default function App() {
           })}
         >
           <Stack.Screen name="Bun venit!" component={Welcome} />
-          <Stack.Screen name="LoginForm" component={LoginForm} />
-          <Stack.Screen name="Inregistrare" component={Register} />
           <Stack.Screen name="Despre aplicatie" component={AboutTheApp} />
+          <Stack.Screen name="Autentificare" component={LoginForm} />
+          <Stack.Screen name="Inregistrare" component={Register} />
           <Stack.Screen name="Acasa" component={Home} />
           <Stack.Screen name="Tutorial" component={Tutorial} />
           <Stack.Screen name="Gestionare Cheltuieli" component={ViewSpendings} />
           <Stack.Screen name="Jurnal Cheltuieli" component={ViewSpendings} />
           <Stack.Screen name="Statistici Cheltuieli" component={MoreStatistics} />
           <Stack.Screen name="Consiliere Financiara" component={GenerateReports} />
+          <Stack.Screen name="Setarile contului" component={Account} />
+          <Stack.Screen name="Logout" component={Welcome} />
         </Stack.Navigator>
       </AuthProvider>
     </NavigationContainer>
