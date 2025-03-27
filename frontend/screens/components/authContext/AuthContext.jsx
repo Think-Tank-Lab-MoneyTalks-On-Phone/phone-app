@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
             await AsyncStorage.removeItem('auth');
             setUserEmail(null);
             setUserPassword(null);
-            navigation.navigate('Login');
+            navigation.navigate('Autentificare');
         } catch (error) {
             console.error('Error during logout:', error);
         }
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ userEmail, userPassword, login, logout, isLoading }}>
-            {!isLoading && children}
+            {children}
         </AuthContext.Provider>
     );
 };
