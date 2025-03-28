@@ -2,8 +2,10 @@ import React, { useState, useRef } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, PanResponder, Animated } from "react-native";
 import LottieView from 'lottie-react-native';
 import { useNavigation, useRoute } from "@react-navigation/native";
-import HomeIcon from "../icons/Home_custom_icon.json";
-import TutorialIcon from "../icons/Play pause_custom_icon.json";
+import WelcomeIcon from "../icons/WelcomeIcon.json";
+import AboutTheAppIcon from "../icons/AboutTheApp.json";
+import AuthIcon from "../icons/AuthIcon.json";
+import LoginIcon from "../icons/Login.json";
 
 
 export default function LoginRegisterMenu() {
@@ -78,10 +80,10 @@ export default function LoginRegisterMenu() {
 
 
     const menuItems = [
-        { id: "sideBarOptionWelcome", path: "Bun venit!", label: "Bun venit!", icon: HomeIcon },
-        { id: "sideBarOptionAboutTheApp", path: "Despre aplicatie", label: "Despre aplicatie", icon: HomeIcon },
-        { id: "sideBarOptionAuth", path: "Autentificare", label: "Autentificare", icon: HomeIcon },
-        { id: "sideBarOptionRegister", path: "Inregistrare", label: "Inregistrare", icon: TutorialIcon },
+        { id: "sideBarOptionWelcome", path: "Bun venit!", label: "Bun venit!", icon: WelcomeIcon },
+        { id: "sideBarOptionAboutTheApp", path: "Despre aplicatie", label: "Despre aplicatie", icon: AboutTheAppIcon },
+        { id: "sideBarOptionAuth", path: "Autentificare", label: "Autentificare", icon: LoginIcon },
+        { id: "sideBarOptionRegister", path: "Inregistrare", label: "Inregistrare", icon: AuthIcon },
     ];
     return (
         <>

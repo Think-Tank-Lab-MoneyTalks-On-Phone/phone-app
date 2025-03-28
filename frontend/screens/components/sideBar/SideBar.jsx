@@ -8,6 +8,8 @@ import GestionareCheltuieliIcon from "../icons/Folder open_custom_icon.json";
 import JurnalCheltuieliIcon from "../icons/Mail_custom_icon.json";
 import StatisticiCheltuieliIcon from "../icons/Graph_custom_icon.json";
 import ConsiliereCheltuieliIcon from "../icons/Bulb_custom_icon.json";
+import AccountSettingsIcon from "../icons/AccSettings.json";
+import LogoutIcon from "../icons/Logout.json";
 
 export default function SideBar() {
   const navigation = useNavigation();
@@ -87,8 +89,8 @@ export default function SideBar() {
     { id: "sideBarOptionJurnalCheltuieli", path: "Jurnal Cheltuieli", label: "Jurnal cheltuieli", icon: JurnalCheltuieliIcon },
     { id: "sideBarOptionStatisticiCheltuieli", path: "Statistici Cheltuieli", label: "Statistici cheltuieli", icon: StatisticiCheltuieliIcon },
     { id: "sideBarOptionConsiliereFinanciara", path: "Consiliere Financiara", label: "Consiliere financiara", icon: ConsiliereCheltuieliIcon },
-    { id: "sideBarOptionSettings", path: "Setarile contului", label: "Setarile contului", icon: ConsiliereCheltuieliIcon },
-    { id: "sideBarOptionLogout", path: "Logout", label: "Logout", icon: ConsiliereCheltuieliIcon },
+    { id: "sideBarOptionSettings", path: "Setarile contului", label: "Setarile contului", icon: AccountSettingsIcon },
+    { id: "sideBarOptionLogout", path: "Logout", label: "Logout", icon: LogoutIcon },
   ];
 
   return (
