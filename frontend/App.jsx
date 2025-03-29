@@ -20,7 +20,7 @@ import Logout from './screens/components/logout/Logout.jsx';
 
 
 {/* open the terminal and run: npm install packages */ }
-{/* to run the project run: npm start     in the terminal and go to your localhost address shown in the terminal*/ }
+{/* to run the project run: npm start     in the terminal, open android studio, launch your emulator and then type "a" in the terminal*/ }
 
 
 const Stack = createStackNavigator();
