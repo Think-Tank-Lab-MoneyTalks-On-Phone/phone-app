@@ -59,9 +59,7 @@ export default function ViewSpendings() {
     <View style={styles.container}>
       <ScreensBackground/>
       <SideBar/>
-      <ScrollView>
-        <ViewAllSpendingsTable spendings={allSpendings} onSpendingDeleted={updateSpendings} />
-      </ScrollView>
+      <ViewAllSpendingsTable spendings={allSpendings} onSpendingDeleted={updateSpendings} />
     </View>
   );
 }

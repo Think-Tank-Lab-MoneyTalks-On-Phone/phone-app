@@ -194,134 +194,178 @@ const ViewAllSpendingsTable = ({ spendings, onSpendingDeleted }) => {
     }
 
     return (
-        <View style={styles.container}>
-            {/* Filtre - Folosim ScrollView separat cu orientare orizontală */}
-            {/* Filtre */}
+        <View style={{ flex: 1 }}>
             <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.filtersScrollContainer}
+                contentContainerStyle={styles.contentContainer}
+                nestedScrollEnabled={true}
             >
-                <View style={styles.filtersContainer}>
-                    {/* Rândul cu prețuri */}
-                    <View style={styles.filterRow}>
-                        <View style={styles.filterGroup}>
-                            <Text>Preț minim:</Text>
-                            <TextInput
-                                style={styles.input}
-                                keyboardType="numeric"
-                                value={minPrice}
-                                onChangeText={setMinPrice}
-                                placeholder="Preț minim"
-                            />
-                        </View>
+                {/* Filtre - Scroll orizontal */}
+                <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.filtersScrollContainer}
+                >
+                    <View style={styles.filtersContainer}>
+                        {/* Rândul cu prețuri */}
+                        <View style={styles.filterRow}>
+                            <View style={styles.filterGroup}>
+                                <Text>Preț minim:</Text>
+                                <TextInput
+                                    style={styles.input}
+                                    keyboardType="numeric"
+                                    value={minPrice}
+                                    onChangeText={setMinPrice}
+                                    placeholder="Preț minim"
+                                />
+                            </View>
 
-                        <View style={styles.filterGroup}>
-                            <Text>Preț maxim:</Text>
-                            <TextInput
-                                style={styles.input}
-                                keyboardType="numeric"
-                                value={maxPrice}
-                                onChangeText={setMaxPrice}
-                                placeholder="Preț maxim"
-                            />
-                        </View>
-                    </View>
-
-                    {/* Rândul cu date */}
-                    <View style={styles.filterRow}>
-                        <View style={styles.filterGroup}>
-                            <Text>De la:</Text>
-                            <TextInput
-                                style={styles.input}
-                                value={startDate}
-                                onChangeText={setStartDate}
-                                placeholder="YYYY-MM-DD"
-                            />
-                        </View>
-
-                        <View style={styles.filterGroup}>
-                            <Text>Până la:</Text>
-                            <TextInput
-                                style={styles.input}
-                                value={endDate}
-                                onChangeText={setEndDate}
-                                placeholder="YYYY-MM-DD"
-                            />
-                        </View>
-                    </View>
-
-                    {/* Rândul cu companie și sortare */}
-                    <View style={styles.companyRow}>
-                        <View style={{ flex: 1 }}>
-                            <Text>Companie:</Text>
-                            <View style={styles.companyInput}>
-                                <Picker
-                                    selectedValue={selectedCompany}
-                                    style={styles.picker}
-                                    onValueChange={setSelectedCompany}
-                                >
-                                    <Picker.Item label="Toate companiile" value="" />
-                                    {companies.map(company => (
-                                        <Picker.Item key={company} label={company} value={company} />
-                                    ))}
-                                </Picker>
+                            <View style={styles.filterGroup}>
+                                <Text>Preț maxim:</Text>
+                                <TextInput
+                                    style={styles.input}
+                                    keyboardType="numeric"
+                                    value={maxPrice}
+                                    onChangeText={setMaxPrice}
+                                    placeholder="Preț maxim"
+                                />
                             </View>
                         </View>
 
-                        <TouchableOpacity
-                            style={styles.sortButton}
-                            onPress={() => setSortOrder(prev => prev === 'desc' ? 'asc' : 'desc')}
-                        >
-                            <Text style={styles.sortButtonText}>
-                                Sortare ({sortOrder === 'desc' ? '↓' : '↑'})
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </ScrollView>
+                        {/* Rândul cu date */}
+                        <View style={styles.filterRow}>
+                            <View style={styles.filterGroup}>
+                                <Text>De la:</Text>
+                                <TextInput
+                                    style={styles.input}
+                                    value={startDate}
+                                    onChangeText={setStartDate}
+                                    placeholder="YYYY-MM-DD"
+                                />
+                            </View>
 
-            {/* Antet tabel */}
-            <View style={styles.header}>
-                <Text style={styles.headerCell}>Companie</Text>
-                <Text style={styles.headerCell}>Produse</Text>
-                <Text style={styles.headerCell}>Preț</Text>
-                <Text style={styles.headerCell}>Dată</Text>
-                <Text style={styles.headerCell}>Acțiuni</Text>
-            </View>
+                            <View style={styles.filterGroup}>
+                                <Text>Până la:</Text>
+                                <TextInput
+                                    style={styles.input}
+                                    value={endDate}
+                                    onChangeText={setEndDate}
+                                    placeholder="YYYY-MM-DD"
+                                />
+                            </View>
+                        </View>
 
-            {/* Lista principală cu dimensiune fixă */}
-            <View style={styles.listContainer}>
-                <FlatList
-                    data={currentSpendings}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.spendingId.toString()}
-                    contentContainerStyle={styles.listContent}
-                    ListFooterComponent={
-                        <View style={styles.pagination}>
+                        {/* Rândul cu companie și sortare */}
+                        <View style={styles.companyRow}>
+                            <View style={{ flex: 1 }}>
+                                <Text>Companie:</Text>
+                                <View style={styles.companyInput}>
+                                    <Picker
+                                        selectedValue={selectedCompany}
+                                        style={styles.picker}
+                                        onValueChange={setSelectedCompany}
+                                    >
+                                        <Picker.Item label="Toate companiile" value="" />
+                                        {companies.map(company => (
+                                            <Picker.Item key={company} label={company} value={company} />
+                                        ))}
+                                    </Picker>
+                                </View>
+                            </View>
+
                             <TouchableOpacity
-                                style={[styles.pageButton, currentPage === 1 && styles.disabledButton]}
-                                onPress={goToPreviousPage}
-                                disabled={currentPage === 1}
+                                style={styles.sortButton}
+                                onPress={() => setSortOrder(prev => prev === 'desc' ? 'asc' : 'desc')}
                             >
-                                <Text>⬅</Text>
-                            </TouchableOpacity>
-
-                            <Text style={styles.pageText}>{currentPage}/{totalPages}</Text>
-
-                            <TouchableOpacity
-                                style={[styles.pageButton, currentPage === totalPages && styles.disabledButton]}
-                                onPress={goToNextPage}
-                                disabled={currentPage === totalPages}
-                            >
-                                <Text>➡</Text>
+                                <Text style={styles.sortButtonText}>
+                                    Sortare ({sortOrder === 'desc' ? '↓' : '↑'})
+                                </Text>
                             </TouchableOpacity>
                         </View>
-                    }
-                    removeClippedSubviews
-                    windowSize={5}
-                />
-            </View>
+                    </View>
+                </ScrollView>
+
+                {/* Antet tabel */}
+                <View style={styles.header}>
+                    <Text style={styles.headerCell}>Companie</Text>
+                    <Text style={styles.headerCell}>Produse</Text>
+                    <Text style={styles.headerCell}>Preț</Text>
+                    <Text style={styles.headerCell}>Dată</Text>
+                    <Text style={styles.headerCell}>Acțiuni</Text>
+                </View>
+
+                {/* Lista principală */}
+                {currentSpendings.map((item) => (
+                    <View key={item.spendingId.toString()} style={styles.itemContainer}>
+                        <TouchableOpacity
+                            style={styles.row}
+                            onPress={() => handleToggleDetails(item.spendingId)}
+                        >
+                            <Text style={styles.cell}>{item.companyName}</Text>
+                            <Text style={styles.cell}>{item.products.length}</Text>
+                            <Text style={styles.cell}>{item.totalPrice.toFixed(2)}</Text>
+                            <Text style={styles.cell}>
+                                {parseEuropeanDate(item.date).toLocaleDateString('ro-RO')}{'\n'}
+                                {parseEuropeanDate(item.date).toLocaleTimeString('ro-RO')}
+                            </Text>
+                            <TouchableOpacity
+                                style={styles.detailsButton}
+                                onPress={() => handleToggleDetails(item.spendingId)}
+                            >
+                                <Text style={styles.buttonText}>
+                                    {selectedSpendingId === item.spendingId ? 'Ascunde' : 'Detalii'}
+                                </Text>
+                            </TouchableOpacity>
+                        </TouchableOpacity>
+
+                        {selectedSpendingId === item.spendingId && (
+                            <View style={styles.detailsContainer}>
+                                <Text style={styles.detailsText}>
+                                    {`Achiziție făcută la ${parseEuropeanDate(item.date).toLocaleDateString('ro-RO')}, ora ${parseEuropeanDate(item.date).toLocaleTimeString('ro-RO')}`}
+                                </Text>
+                                {item.description && (
+                                    <Text style={styles.detailsText}>Descriere: {item.description}</Text>
+                                )}
+                                <Text style={styles.subHeader}>Produse:</Text>
+                                {item.products.map((product, index) => (
+                                    <View key={index} style={styles.productRow}>
+                                        <Text style={styles.productCell}>{product.itemName}</Text>
+                                        <Text style={styles.productCell}>{categoryMap[product.category]}</Text>
+                                        <Text style={styles.productCell}>{product.units}</Text>
+                                        <Text style={styles.productCell}>{(product.pricePerUnit * product.units).toFixed(2)}</Text>
+                                    </View>
+                                ))}
+                                <TouchableOpacity
+                                    style={styles.deleteButton}
+                                    onPress={() => handleDelete(item.spendingId)}
+                                >
+                                    <Text style={styles.deleteButtonText}>Șterge Cheltuiala</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                    </View>
+                ))}
+
+                {/* Paginare */}
+                <View style={styles.pagination}>
+                    <TouchableOpacity
+                        style={[styles.pageButton, currentPage === 1 && styles.disabledButton]}
+                        onPress={goToPreviousPage}
+                        disabled={currentPage === 1}
+                    >
+                        <Text>⬅</Text>
+                    </TouchableOpacity>
+
+                    <Text style={styles.pageText}>{currentPage}/{totalPages}</Text>
+
+                    <TouchableOpacity
+                        style={[styles.pageButton, currentPage === totalPages && styles.disabledButton]}
+                        onPress={goToNextPage}
+                        disabled={currentPage === totalPages}
+                    >
+                        <Text>➡</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
 
             <Toast />
         </View>
@@ -372,12 +416,12 @@ const styles = StyleSheet.create({
         left: 8,
     },
     companyInput: {
-        right: 25, 
+        right: 25,
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 8,
         overflow: 'hidden',
-        transform: [{scale: 0.75}],
+        transform: [{ scale: 0.75 }],
     },
     picker: {
         flex: 1,
@@ -503,6 +547,9 @@ const styles = StyleSheet.create({
     },
     listContent: {
         paddingBottom: 16,
+    },
+    contentContainer: {
+        padding: 16,
     },
 });
 

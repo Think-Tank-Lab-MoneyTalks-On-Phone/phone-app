@@ -17,6 +17,7 @@ import ProtectedRoute from './screens/components/protectedRoutes/ProtectedRoutes
 import PublicRoute from './screens/components/protectedRoutes/PublicRoute.jsx';
 import { useAuth } from './screens/components/authContext/AuthContext.jsx';
 import Logout from './screens/components/logout/Logout.jsx';
+import UploadBill from './screens/uploadBill/UploadBill.jsx';
 
 
 {/* open the terminal and run: npm install packages */ }
@@ -85,7 +86,7 @@ const App = () => {
             {() => <ProtectedRoute><Tutorial /></ProtectedRoute>}
           </Stack.Screen>
           <Stack.Screen name="Gestionare Cheltuieli">
-            {() => <ProtectedRoute><ViewSpendings /></ProtectedRoute>}
+            {() => <ProtectedRoute><UploadBill /></ProtectedRoute>}
           </Stack.Screen>
           <Stack.Screen name="Jurnal Cheltuieli">
             {() => <ProtectedRoute><ViewSpendings /></ProtectedRoute>}
