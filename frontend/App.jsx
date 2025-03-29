@@ -17,7 +17,14 @@ import ProtectedRoute from './screens/components/protectedRoutes/ProtectedRoutes
 import PublicRoute from './screens/components/protectedRoutes/PublicRoute.jsx';
 import { useAuth } from './screens/components/authContext/AuthContext.jsx';
 import Logout from './screens/components/logout/Logout.jsx';
+
+
+{/* open the terminal and run: npm install packages */ }
+{/* to run the project run: npm start     in the terminal and go to your localhost address shown in the terminal*/ }
+
+
 const Stack = createStackNavigator();
+
 
 const CustomHeader = () => (
   <Image
