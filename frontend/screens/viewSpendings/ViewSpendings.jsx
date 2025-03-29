@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ScreensBackground from "../components/screens-background/ScreensBackground";
 import SideBar from "../components/sideBar/SideBar";
 import ViewAllSpendingsTable from "./viewSpendingsTable/ViewSpendingsTable";
+import ViewSpendingsImage from "./viewSpendingsImage/ViewSpendingsImage";
 
 export default function ViewSpendings() {
   const [allSpendings, setAllSpendings] = useState([]);

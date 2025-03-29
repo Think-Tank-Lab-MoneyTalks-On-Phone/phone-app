@@ -3,6 +3,9 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput, Button
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
+import VectorialIlustrationImage from "../../../assets/view-all-spendings-img.png"
+import { Image } from 'react-native';
+import ViewSpendingsImage from '../viewSpendingsImage/ViewSpendingsImage';
 
 const ViewAllSpendingsTable = ({ spendings, onSpendingDeleted }) => {
     const categoryMap = {
@@ -365,6 +368,9 @@ const ViewAllSpendingsTable = ({ spendings, onSpendingDeleted }) => {
                         <Text>➡</Text>
                     </TouchableOpacity>
                 </View>
+
+                <ViewSpendingsImage/>
+
             </ScrollView>
 
             <Toast />
