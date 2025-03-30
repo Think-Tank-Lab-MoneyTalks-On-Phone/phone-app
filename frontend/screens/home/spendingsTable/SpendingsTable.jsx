@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         elevation: 3,
         height: 384,
         width: 400,
-        marginTop: 100,
+        marginTop: 125,
         right: 4,
         transform: [{ scale: 0.8 }]
     },
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     text: {
-        top:125,
+        top:150,
         fontSize: 20,
         left: 77,
     },
