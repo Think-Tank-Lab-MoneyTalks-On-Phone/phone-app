@@ -13,8 +13,9 @@ const SpendingsStatistic = ({ data, containerTop, containerRight }) => {
 
     useEffect(() => {
         if (data && data.length > 0) {
-            const labels = data.map((item) => item.luna);
-            const values = data.map((item) => item.suma);
+            const lastFour = data.slice(-4).reverse();
+            const labels = lastFour.map((item) => item.luna);
+            const values = lastFour.map((item) => item.suma);
 
             setChartData({
                 labels,
@@ -30,7 +31,6 @@ const SpendingsStatistic = ({ data, containerTop, containerRight }) => {
         }
     }, [data]);
 
-    // Calculează dimensiuni
     const containerWidth = Math.min(screenWidth * 0.8, 900);
 
     return (
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         transform: [{ scale: 0.75 }],
     },
     text: {
-        top:0,
+        top: 0,
         fontSize: 20,
         left: 47,
     },
