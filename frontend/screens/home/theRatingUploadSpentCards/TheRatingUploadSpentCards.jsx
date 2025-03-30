@@ -180,8 +180,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        top: 0,
-        right: 0,
+        top: 65,
+        right: 4,
     },
     card: {
         flexDirection: 'colomn',

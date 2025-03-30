@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import ScreensBackground from "../components/screens-background/ScreensBackground";
 import TheRatingUploadSpentCards from "./theRatingUploadSpentCards/TheRatingUploadSpentCards";
 import SideBar from "../components/sideBar/SideBar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios"
+import SpendingsTable from "./spendingsTable/SpendingsTable";
 
 export default function Home() {
   const [lastFiveSpendings, setLastFiveSpendings] = useState([]);
@@ -99,10 +100,13 @@ export default function Home() {
     <View style={styles.container}>
       <ScreensBackground />
       <SideBar />
+      <ScrollView>
       <TheRatingUploadSpentCards
                 lastThirtyDaysSpendingsSum={lastThirtyDaysSpendingsSum}
                 uploadedBillsOnThePastThirtyDays={uploadedBillsOnThePastThirtyDays}
             />
+      <SpendingsTable data={lastFiveSpendings} />
+      </ScrollView>
     </View>
   );
 }
