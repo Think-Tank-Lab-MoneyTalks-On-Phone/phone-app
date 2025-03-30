@@ -6,6 +6,7 @@ import SideBar from "../components/sideBar/SideBar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios"
 import SpendingsTable from "./spendingsTable/SpendingsTable";
+import SpendingsStatistic from "./spendingsStatistic/SpendingsStatistic";
 
 export default function Home() {
   const [lastFiveSpendings, setLastFiveSpendings] = useState([]);
@@ -106,6 +107,7 @@ export default function Home() {
                 uploadedBillsOnThePastThirtyDays={uploadedBillsOnThePastThirtyDays}
             />
       <SpendingsTable data={lastFiveSpendings} />
+      <SpendingsStatistic data={lastTwelveMonthsSpendings} />
       </ScrollView>
     </View>
   );
