@@ -184,7 +184,7 @@ const TheRatingUploadSpentCards = ({ lastThirtyDaysSpendingsSum, uploadedBillsOn
                         <Text style={styles.title}>Bani cheltuiti (Martie)</Text>
                         <View style={styles.bottomSection}>
                             <Svg width={24} height={24} viewBox="0 0 512 512">
-                                <Path d="M448 183.8v-123A44.66 44.66 0 00403.29 16H280.36a30.62 30.62 0 00-21.51 8.89L13.09 270.58a44.86 44.86 0 000 63.34l117 117a44.84 44.84 0 0063.33 0l245.69-245.61A30.6 30.6 0 00448 183.8zM352 144a32 32 0 1132-32 32 32 0 01-32 32z" fill="black" />
+                                <Path d="M448 183.8v-123A44.66 44.66 0 00403.29 16H280.36a30.62 30.62 0 00-21.51 8.89L13.09 270.58a44.86 44.86 0 000 63.34l117 117a44.84 44.84 0 0063.33 0l245.69-245.61A30.6 30.6 0 00448 183.8zM352 144a32 32 0 1132-32 32 32 0 01-32 32z" fill="rgb(68, 255, 0)" />
                             </Svg>
                             <ImageBackground
                                 style={styles.thirdCardImage}
