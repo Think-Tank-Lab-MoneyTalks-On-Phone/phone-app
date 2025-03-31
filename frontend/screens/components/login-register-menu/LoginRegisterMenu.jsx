@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, PanResponder, Animated } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, PanResponder, Animated, Dimensions } from "react-native";
 import LottieView from 'lottie-react-native';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import WelcomeIcon from "../icons/WelcomeIcon.json";
@@ -16,6 +16,9 @@ export default function LoginRegisterMenu() {
     const swipeThreshold = 100;
     const minSwipeDistance = 5;
 
+    const screenWidth = Dimensions.get('window').width;
+    const leftEdgeThreshold = screenWidth * 0.2;
+
     const panResponder = useRef(
         PanResponder.create({
             onStartShouldSetPanResponder: () => true,
@@ -25,7 +28,7 @@ export default function LoginRegisterMenu() {
 
                 if (!sidebarVisible) {
                     const isRightSwipe = dx > minSwipeDistance;
-                    const isNearLeftEdge = gestureState.moveX < 30;
+                    const isNearLeftEdge = gestureState.moveX < leftEdgeThreshold;
                     return isHorizontal && isRightSwipe && isNearLeftEdge;
                 }
                 return isHorizontal && Math.abs(dx) > minSwipeDistance;
@@ -261,5 +264,5 @@ const styles = StyleSheet.create({
         zIndex: 1001,
         justifyContent: 'center',
         alignItems: 'center',
-      },
+    },
 });
