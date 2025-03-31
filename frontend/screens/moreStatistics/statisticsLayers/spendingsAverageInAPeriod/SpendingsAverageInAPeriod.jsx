@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
-import { PieChart } from 'react-native-chart-kit'; // Vom folosi PieChart pentru a crea un grafic similar
-import DateInputCalendar from '../components/dateInputCalendar/DateInputCalendar'; // Componenta pentru selectarea datei
+import { PieChart } from 'react-native-chart-kit';
+import DateInputCalendar from '../components/dateInputCalendar/DateInputCalendar';
 
 const categoryMap = {
   "ABONAMENTE": "Abonamente",
@@ -38,7 +38,6 @@ const SpendingsAverageInAPeriod = ({ userSpendings, startDate, setStartDate, end
     return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
   };
 
-  // Verificăm dacă perioada este selectată
   if (!startDate || !endDate) {
     return (
       <View style={styles.container}>
@@ -55,7 +54,6 @@ const SpendingsAverageInAPeriod = ({ userSpendings, startDate, setStartDate, end
     );
   }
 
-  // Filtrăm cheltuielile pentru perioada selectată
   const filteredSpendings = userSpendings.filter(spending => {
     const spendingDate = new Date(spending.date);
     const start = new Date(startDate);
@@ -63,10 +61,8 @@ const SpendingsAverageInAPeriod = ({ userSpendings, startDate, setStartDate, end
     return spendingDate >= start && spendingDate <= end;
   });
 
-  // Calculăm numărul de zile din perioada selectată
   const daysCount = Math.max(1, (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24) + 1);
 
-  // Calculăm cheltuielile pe categorii
   const categorySpendings = filteredSpendings.reduce((categories, spending) => {
     if (spending.products) {
       spending.products.forEach(product => {
@@ -79,18 +75,16 @@ const SpendingsAverageInAPeriod = ({ userSpendings, startDate, setStartDate, end
     return categories;
   }, {});
 
-  // Calculăm media cheltuielilor pe zi pentru fiecare categorie
   const chartData = Object.entries(categorySpendings).map(([category, total]) => ({
     category: categoryMap[category] || category,
-    avgPerDay: (parseFloat(total / daysCount)).toFixed(2) // Media pe zi
+    avgPerDay: (parseFloat(total / daysCount)).toFixed(2) 
   }));
 
-  // Sortăm datele pentru chart
-  const sortedChartData = chartData.sort((a, b) => b.avgPerDay - a.avgPerDay); // Sortare descrescătoare după media pe zi
+  const sortedChartData = chartData.sort((a, b) => b.avgPerDay - a.avgPerDay);
 
   const chartDataForPie = sortedChartData.map((data, index) => ({
     name: data.category,
-    population: parseFloat(data.avgPerDay), // Media cheltuielilor pe zi
+    population: parseFloat(data.avgPerDay), 
     color: colors[index % colors.length],
     legendFontColor: '#7F7F7F',
     legendFontSize: 12,

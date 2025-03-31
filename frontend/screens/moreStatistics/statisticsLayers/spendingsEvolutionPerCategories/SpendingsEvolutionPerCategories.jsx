@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Dimensions, TouchableOpacity } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
-import DateInputCalendar from '../components/dateInputCalendar/DateInputCalendar'; // Presupun că ai acest component
+import DateInputCalendar from '../components/dateInputCalendar/DateInputCalendar';
 
 const categoryMap = {
   "ABONAMENTE": "Abonamente",
