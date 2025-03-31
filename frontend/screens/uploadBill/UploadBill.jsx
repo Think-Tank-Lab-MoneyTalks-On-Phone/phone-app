@@ -4,14 +4,13 @@ import { View, Text, TouchableOpacity, StyleSheet, Modal, FlatList } from "react
 import ScreensBackground from "../components/screens-background/ScreensBackground";
 import SideBar from "../components/sideBar/SideBar";
 import OnlineSpending from "./onlineSpending/OnlineSpending";
-import { ScrollView } from "react-native-gesture-handler";
 import anIcon from "../components/icons/AboutTheApp.json";
 import LottieView from "lottie-react-native";
 import UploadSpending from "./uploadSpending/UploadSpending";
 
 
 export default function UploadBill() {
-  const [selectedStatistic, setSelectedStatistic] = useState("uploadOnlineSpending");
+  const [uploadTypeOfBill, setUploadTypeOfBill] = useState("uploadOnlineSpending");
   const [modalVisible, setModalVisible] = useState(false);
 
   const options = [
@@ -19,10 +18,10 @@ export default function UploadBill() {
     { id: "uploadBill", label: "Incarca un bon sau o factura", icon: anIcon },
   ];
 
-  const selectedOption = options.find(option => option.id === selectedStatistic);
+  const selectedOption = options.find(option => option.id === uploadTypeOfBill);
 
-  const renderStatisticComponent = () => {
-    switch (selectedStatistic) {
+  const renderComponent = () => {
+    switch (uploadTypeOfBill) {
       case "uploadOnlineSpending":
         return <OnlineSpending />
       case "uploadBill":
@@ -49,7 +48,7 @@ export default function UploadBill() {
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <TouchableOpacity style={styles.optionItem} onPress={() => {
-                  setSelectedStatistic(item.id);
+                  setUploadTypeOfBill(item.id);
                   setModalVisible(false);
                 }}>
                   <LottieView source={item.icon} autoPlay loop style={styles.icon} />
@@ -60,7 +59,7 @@ export default function UploadBill() {
           </View>
         </Modal>
 
-        <View>{renderStatisticComponent()}</View>
+        <View>{renderComponent()}</View>
 
       </View>
 
