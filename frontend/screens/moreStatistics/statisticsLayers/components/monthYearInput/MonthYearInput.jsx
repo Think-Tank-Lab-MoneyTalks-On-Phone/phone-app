@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
 export default function MonthYearInput({ 
+  /* TO BE FIXED */
   startMonth, setStartMonth, 
   startYear, setStartYear, 
   endMonth, setEndMonth, 
   endYear, setEndYear 
 }) {
   const today = new Date();
-  const currentMonth = today.getMonth() + 1;
+  const currentMonth = today.getMonth() + 1; 
   const currentYear = today.getFullYear();
 
   const months = [
@@ -17,17 +18,17 @@ export default function MonthYearInput({
     "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"
   ];
 
-  const years = Array.from({ length: 20 }, (_, i) => currentYear - 1 + i);
+  const years = Array.from({ length: 20 }, (_, i) => currentYear - 1 + i); 
 
   const handleStartYearChange = (newYear) => {
     setStartYear(newYear);
-    setEndYear(null);
-    setEndMonth(null);
+    setEndYear(null);  
+    setEndMonth(null); 
 
     if (startMonth !== null) {
-      const maxMonth = newYear === currentYear ? currentMonth - 1 : 12;
+      const maxMonth = newYear === currentYear ? currentMonth - 1 : 12; 
       if (startMonth > maxMonth) {
-        setStartMonth(null);
+        setStartMonth(null); 
       }
     }
   };
@@ -35,10 +36,10 @@ export default function MonthYearInput({
   const handleEndYearChange = (newYear) => {
     setEndYear(newYear);
     if (endMonth !== null) {
-      const minMonth = startYear === newYear ? startMonth + 1 : 1;
-      const maxMonth = newYear === currentYear ? currentMonth : 12;
+      const minMonth = startYear === newYear ? startMonth + 1 : 1;  
+      const maxMonth = newYear === currentYear ? currentMonth : 12; 
       if (endMonth < minMonth || endMonth > maxMonth) {
-        setEndMonth(null);
+        setEndMonth(null); 
       }
     }
   };
@@ -47,10 +48,11 @@ export default function MonthYearInput({
     <View style={styles.container}>
       <View style={styles.pickerGroup}>
         <Text style={styles.label}>De la data</Text>
+        
         <Picker
           selectedValue={startMonth}
           onValueChange={(value) => setStartMonth(value)}
-          enabled={!!startYear}
+          enabled={!!startYear} 
           style={styles.picker}
         >
           <Picker.Item label="Selectează luna" value={null} />
@@ -58,7 +60,12 @@ export default function MonthYearInput({
             const monthValue = index + 1;
             const maxMonth = startYear === currentYear ? currentMonth - 1 : 12;
             return (
-              <Picker.Item key={monthValue} label={name} value={monthValue} enabled={monthValue <= maxMonth} />
+              <Picker.Item 
+                key={monthValue} 
+                label={name} 
+                value={monthValue} 
+                enabled={monthValue <= maxMonth} 
+              />
             );
           })}
         </Picker>
@@ -77,10 +84,11 @@ export default function MonthYearInput({
 
       <View style={styles.pickerGroup}>
         <Text style={styles.label}>Până la data</Text>
+
         <Picker
           selectedValue={endMonth}
           onValueChange={(value) => setEndMonth(value)}
-          enabled={!!endYear && !!startYear && !!startMonth}
+          enabled={!!endYear && !!startYear && !!startMonth} 
           style={styles.picker}
         >
           <Picker.Item label="Selectează luna" value={null} />
@@ -89,7 +97,12 @@ export default function MonthYearInput({
             const minMonth = startYear === endYear ? startMonth + 1 : 1;
             const maxMonth = endYear === currentYear ? currentMonth : 12;
             return (
-              <Picker.Item key={monthValue} label={name} value={monthValue} enabled={monthValue >= minMonth && monthValue <= maxMonth} />
+              <Picker.Item 
+                key={monthValue} 
+                label={name} 
+                value={monthValue} 
+                enabled={monthValue >= minMonth && monthValue <= maxMonth} 
+              />
             );
           })}
         </Picker>
@@ -97,7 +110,7 @@ export default function MonthYearInput({
         <Picker
           selectedValue={endYear}
           onValueChange={handleEndYearChange}
-          enabled={!!startYear && !!startMonth}
+          enabled={!!startYear && !!startMonth} 
           style={styles.picker}
         >
           <Picker.Item label="Selectează anul" value={null} />
