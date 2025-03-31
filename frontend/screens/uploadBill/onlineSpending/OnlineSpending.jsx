@@ -118,6 +118,7 @@ const OnlineSpending = () => {
 
             const userId = userResponse.data.id;
 
+            /*
             console.log("Datele trimise:", {
                 userId: userId,
                 companyName: companyName,
@@ -126,7 +127,7 @@ const OnlineSpending = () => {
                 products: formattedItems,
                 description: description
             });
-
+            */
 
             const response = await axios.post(`${API_BASE_URL}/spending`, {
                 userId: userId,
