@@ -195,12 +195,12 @@ const TheRatingUploadSpentCards = ({ lastThirtyDaysSpendingsSum, uploadedBillsOn
                                 xmlns="http://www.w3.org/2000/svg"
                                 width={20}
                                 height={20}
-                                style={{ fill: getWarningIconColor(), transition: 'fill 0.3s ease', top: -25, right: 20 }}
+                                style={{ fill: getWarningIconColor(), transition: 'fill 0.3s ease', top: -25, right: 23 }}
                             >
                                 <Path d="M256 32L20 464h472L256 32zM256 176c10.7 0 19.6 8.6 19.6 19.2V320c0 10.6-8.9 19.2-19.6 19.2s-19.6-8.6-19.6-19.2V195.2c0-10.6 8.9-19.2 19.6-19.2zm0 192c14.2 0 25.6 11.4 25.6 25.6s-11.4 25.6-25.6 25.6-25.6-11.4-25.6-25.6 11.4-25.6 25.6-25.6z" />
                             </Svg>
                             <Text style={styles.value}>
-                                {lastThirtyDaysSpendingsSum === undefined ? '0' : lastThirtyDaysSpendingsSum} RON
+                                {lastThirtyDaysSpendingsSum === (undefined) ? '0' : lastThirtyDaysSpendingsSum} RON
                             </Text>
                             <Text style={styles.moneyLimit}>
                                 {myUserSpendingsLimits && myUserSpendingsLimits.length > 0
@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
     moneyLimit: {
         position: 'relative',
         bottom: 25,
-        right: 110,
+        left: -78,
         fontSize: 17,
         fontWeight: '700',
     },

@@ -42,6 +42,8 @@ export default function Logos() {
         const pasteEnd = new Date(paste);
         pasteEnd.setDate(pasteEnd.getDate() + holidayPlus);
 
+        console.log(paste);
+
         if (today >= craciunStart && today <= craciunEnd) {
             setLogo(logoCraciun);
         } else if (today >= pasteStart && today <= pasteEnd) {
