@@ -2,13 +2,17 @@ import React from "react";
 import { View, Text, StyleSheet } from 'react-native';
 import ScreensBackground from "../components/screens-background/ScreensBackground";
 import SideBar from "../components/sideBar/SideBar";
+import OnlineSpending from "./onlineSpending/OnlineSpending";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function UploadBill() {
   return (
     <View style={styles.container}>
       <ScreensBackground/>
       <SideBar/>
-      <Text style={styles.text}>&gt;:D</Text>
+      <ScrollView>
+      <OnlineSpending />
+      </ScrollView>
     </View>
   );
 }
