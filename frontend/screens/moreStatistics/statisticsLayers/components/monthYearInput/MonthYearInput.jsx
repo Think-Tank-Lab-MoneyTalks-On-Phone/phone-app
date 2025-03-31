@@ -125,6 +125,7 @@ export default function MonthYearInput({
 
 const styles = StyleSheet.create({
   container: {
+    marginBottom: 30,
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10,
