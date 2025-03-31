@@ -62,10 +62,18 @@ const OnlineSpending = () => {
 
     const handleItemChange = (id, field, value) => {
         const updatedItems = items.map(item =>
-            item.id === id ? { ...item, [field]: value } : item
+            item.id === id
+                ? {
+                    ...item,
+                    [field]: field === "pricePerUnit" || field === "units"
+                        ? value === "" ? 0 : Number(value)
+                        : value
+                }
+                : item
         );
         setItems(updatedItems);
     };
+
 
     const handleSubmit = async () => {
         if (!companyName || !date || !description || items.length === 0) {
@@ -81,12 +89,20 @@ const OnlineSpending = () => {
         const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
         const now = new Date();
         const fullDateTime = `${formattedDate}T${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:00`;
-        const formattedItems = items.map(item => ({
-            itemName: item.itemName,
-            pricePerUnit: parseFloat(item.pricePerUnit),
-            units: parseInt(item.units, 10),
-            category: item.category
-        }));
+        const formattedItems = items
+            .filter(item =>
+                item.itemName.trim() !== "" &&
+                item.category.trim() !== "" &&
+                !isNaN(item.pricePerUnit) &&
+                !isNaN(item.units)
+            )
+            .map(item => ({
+                itemName: item.itemName,
+                pricePerUnit: Number(item.pricePerUnit),
+                units: Number(item.units),
+                category: item.category
+            }));
+
 
         const totalPrice = formattedItems.reduce((sum, item) => sum + (item.pricePerUnit * item.units), 0);
 
@@ -101,6 +117,16 @@ const OnlineSpending = () => {
             });
 
             const userId = userResponse.data.id;
+
+            console.log("Datele trimise:", {
+                userId: userId,
+                companyName: companyName,
+                totalPrice: totalPrice,
+                date: fullDateTime,
+                products: formattedItems,
+                description: description
+            });
+
 
             const response = await axios.post(`${API_BASE_URL}/spending`, {
                 userId: userId,
@@ -281,7 +307,7 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         color: '#2D3436',
         textAlign: "center",
-        
+
     },
     itemRow: {
         flexDirection: 'row',
