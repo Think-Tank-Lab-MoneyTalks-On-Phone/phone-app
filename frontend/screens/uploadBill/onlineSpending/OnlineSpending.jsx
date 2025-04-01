@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF'
     },
     addButton: {
-        backgroundColor: '#FFF9E1',
+        backgroundColor: '#FFF200',
         padding: 12,
         borderRadius: 8,
         alignItems: 'center',
@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
         borderColor: '#FFE484'
     },
     addButtonText: {
-        color: '#CCA000',
+        color: 'black',
         fontWeight: '600'
     },
     descriptionContainer: {
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF'
     },
     submitButton: {
-        backgroundColor: '#FFD700',
+        backgroundColor: '#FFF200',
         padding: 16,
         borderRadius: 8,
         alignItems: 'center',
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     },
     submitButtonText: {
         fontWeight: '700',
-        color: '#2D3436',
+        color: 'black',
         fontSize: 16
     }
 });

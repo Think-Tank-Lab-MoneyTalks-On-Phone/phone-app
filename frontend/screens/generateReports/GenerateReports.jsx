@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   button: {
-    backgroundColor: '#FFD700',
+    backgroundColor: '#FFF200',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',

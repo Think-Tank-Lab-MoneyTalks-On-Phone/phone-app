@@ -79,8 +79,8 @@ export default function AboutTheApp() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: "center", justifyContent: "center", paddingTop: 10 },
-  button: { flexDirection: "row", alignItems: "center", padding: 15, backgroundColor: "#2563eb", borderRadius: 8, transform: [{ scale: 0.8 }] },
-  buttonText: { color: "#fff", fontSize: 16, fontWeight: "bold", marginLeft: 10 },
+  button: { flexDirection: "row", alignItems: "center", padding: 15, backgroundColor: "#FFF200", borderRadius: 8, transform: [{ scale: 0.8 }] },
+  buttonText: { color: "black", fontSize: 16, fontWeight: "bold", marginLeft: 10 },
   modalContainer: { flex: 1, backgroundColor: "white", padding: 20, justifyContent: "center" },
   optionItem: { flexDirection: "row", alignItems: "center", padding: 10, borderBottomWidth: 1, borderBottomColor: "#ddd" },
   icon: { width: 40, height: 40 },
