@@ -4,9 +4,10 @@ import { View, Text, TouchableOpacity, StyleSheet, Modal, FlatList } from "react
 import ScreensBackground from "../components/screens-background/ScreensBackground";
 import SideBar from "../components/sideBar/SideBar";
 import OnlineSpending from "./onlineSpending/OnlineSpending";
-import anIcon from "../components/icons/AboutTheApp.json";
 import LottieView from "lottie-react-native";
 import UploadSpending from "./uploadSpending/UploadSpending";
+import UploadBillIcon from "../components/icons/UploadBill.json";
+import ReceiptIcon from "../components/icons/Receipt.json";
 
 
 export default function UploadBill() {
@@ -14,8 +15,8 @@ export default function UploadBill() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const options = [
-    { id: "uploadOnlineSpending", label: "Incarca o cheltuiala manual", icon: anIcon },
-    { id: "uploadBill", label: "Incarca un bon sau o factura", icon: anIcon },
+    { id: "uploadOnlineSpending", label: "Incarca o cheltuiala manual", icon: ReceiptIcon },
+    { id: "uploadBill", label: "Incarca un bon sau o factura", icon: UploadBillIcon },
   ];
 
   const selectedOption = options.find(option => option.id === uploadTypeOfBill);

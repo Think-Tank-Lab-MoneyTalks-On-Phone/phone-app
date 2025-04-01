@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Modal, FlatList } from "react-native";
 import LottieView from "lottie-react-native";
 import axios from "axios";
-import anIcon from "../components/icons/AboutTheApp.json";
 import SpendingsPerCategories from "./statisticsLayers/spendingsPerCategories/SpendingsPerCategories";
 import SpendingsEvolutionPerCategories from "./statisticsLayers/spendingsEvolutionPerCategories/SpendingsEvolutionPerCategories";
 import SpendingsAverageInAPeriod from "./statisticsLayers/spendingsAverageInAPeriod/SpendingsAverageInAPeriod";
@@ -12,6 +11,13 @@ import TopShopsAttended from "./statisticsLayers/topShopsAttended/TopShopsAttend
 import SideBar from "../components/sideBar/SideBar";
 import ScreensBackground from "../components/screens-background/ScreensBackground";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ShowSpendings from "../components/icons/ShowSpendings.json";
+import SpendingsEvolution from "../components/icons/SpendingsEvolution.json";
+import SpendingsAverage from "../components/icons/SpendingsAverage.json";
+import TopSpendings from "../components/icons/TopSpendings.json";
+import ShoppingCart from "../components/icons/ShoppingCart.json";
+import Shop from "../components/icons/Shop.json"
+
 
 const MoreStatistics = () => {
   const [selectedStatistic, setSelectedStatistic] = useState("cheltuieliPeCategorii");
@@ -50,12 +56,12 @@ const MoreStatistics = () => {
   }, []);
 
   const options = [
-    { id: "cheltuieliPeCategorii", label: "Afisarea cheltuielilor", icon: anIcon },
-    { id: "evolutieCheltuieli", label: "Evoluția cheltuielilor", icon: anIcon },
-    { id: "medieCheltuieli", label: "Media cheltuielilor", icon: anIcon },
-    { id: "topCheltuieli", label: "Top cheltuieli", icon: anIcon },
-    { id: "topProduseCumparate", label: "Produse achizitionate", icon: anIcon },
-    { id: "topMagazineFrecventate", label: "Magazine frecventate", icon: anIcon },
+    { id: "cheltuieliPeCategorii", label: "Afisarea cheltuielilor", icon: ShowSpendings },
+    { id: "evolutieCheltuieli", label: "Evoluția cheltuielilor", icon: SpendingsEvolution },
+    { id: "medieCheltuieli", label: "Media cheltuielilor", icon: SpendingsAverage },
+    { id: "topCheltuieli", label: "Top cheltuieli", icon: TopSpendings },
+    { id: "topProduseCumparate", label: "Produse achizitionate", icon: ShoppingCart },
+    { id: "topMagazineFrecventate", label: "Magazine frecventate", icon: Shop },
   ];
 
   const selectedOption = options.find(option => option.id === selectedStatistic);

@@ -3,20 +3,23 @@ import ScreensBackground from "../components/screens-background/ScreensBackgroun
 import LoginRegisterMenu from "../components/login-register-menu/LoginRegisterMenu.jsx";
 import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Modal, FlatList } from "react-native";
-import anIcon from "../components/icons/AboutTheApp.json";
 import LottieView from "lottie-react-native";
 import { BenefitsOfUsingTheApp, HowDoesTheAppWork, OtherInformation, WhatIsThisApp } from "./Layers.jsx";
 import { ScrollView } from "react-native-gesture-handler";
+import SmartphoneIcon from "../components/icons/Smartphone.json";
+import WrenchIcon from "../components/icons/Wrench.json";
+import BenefitsIcon from "../components/icons/Benefits.json";
+import InfoIcon from "../components/icons/Info.json";
 
 export default function AboutTheApp() {
   const [infoType, setInfoType] = useState("whatIsThisApp");
   const [modalVisible, setModalVisible] = useState(false);
 
   const options = [
-    { id: "whatIsThisApp", label: "Ce este aceasta aplicatie?", icon: anIcon },
-    { id: "howDoesTheAppWork", label: "Cum functioneaza aplicatia?", icon: anIcon },
-    { id: "benefitsOfUsingTheApp", label: "Ce beneficii ofera aplicatia?", icon: anIcon },
-    { id: "otherInformation", label: "Alte informatii", icon: anIcon },
+    { id: "whatIsThisApp", label: "Ce este aceasta aplicatie?", icon: SmartphoneIcon },
+    { id: "howDoesTheAppWork", label: "Cum functioneaza aplicatia?", icon: WrenchIcon },
+    { id: "benefitsOfUsingTheApp", label: "Ce beneficii ofera aplicatia?", icon: BenefitsIcon },
+    { id: "otherInformation", label: "Alte informatii", icon: InfoIcon },
   ];
 
   const selectedOption = options.find(option => option.id === infoType);
